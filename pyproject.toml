@@ -72,3 +72,9 @@ known-first-party = ["plank"]
 quote-style = "double"
 indent-style = "space"
 line-ending = "auto"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "basic"
+pythonVersion = "3.11"

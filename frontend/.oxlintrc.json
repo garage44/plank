@@ -1,16 +1,46 @@
 {
-  "rules": {
-    "typescript/no-explicit-any": "warn",
-    "typescript/no-unused-vars": "warn",
-    "unicorn/filename-case": "off",
-    "import/no-default-export": "off",
-    "indent": ["error", 4]
-  },
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "globals": {
-    "Bun": "readonly"
+    "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/crates/oxc_linter/src/options.json",
+    "categories": {
+      "correctness": "error",
+      "suspicious": "error",
+      "pedantic": "error",
+      "style": "error",
+      "restriction": "off",
+      "nursery": "off"
+    },
+    "plugins": ["react", "jsx-a11y", "typescript", "unicorn", "import"],
+    "rules": {
+      "import/max-dependencies": "off",
+      "eslint/require-await": "off",
+      "eslint-plugin-import/no-named-export": "off",
+      "eslint/max-depth": ["error", 6],
+      "eslint/max-lines": ["error", 1000],
+      "eslint/max-params": ["error", 5],
+      "eslint/max-nested-callbacks": ["error", 10],
+      "prefer-logical-operator-over-ternary": "off",
+      "eslint/no-magic-numbers": "off",
+      "eslint/no-unused-vars": "off",
+      "eslint/no-ternary": "off",
+      "eslint/func-style": "off",
+      "max-lines-per-function": "off",
+      "prefer-default-export": "off",
+      "react-in-jsx-scope": "off",
+      "typescript/consistent-indexed-object-style": "off",
+      "unicorn/explicit-length-check": "off",
+      "unicorn/filename-case": "error",
+      "unicorn/prefer-add-event-listener": "off",
+      "unicorn/prefer-event-target": "off",
+      "unicorn/prefer-structured-clone": "off",
+      "unicorn/no-null": "off",
+      "yoda": "off"
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2022": true
+    },
+    "globals": {
+      "Bun": "readonly",
+      "globalThis": "readonly"
+    }
   }
-}

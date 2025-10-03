@@ -1,10 +1,10 @@
 /**
  * Control panel for WebSocket connection and item creation
  */
-import { wsClient } from '../lib/websocket';
-import { $s } from '../store';
-import { StatusIndicator } from './StatusIndicator';
-import { CreateItemForm } from './CreateItemForm';
+import {wsClient} from '@/lib/websocket'
+import {$s} from '@/store'
+import {StatusIndicator} from '@/components/status-indicator'
+import {CreateItemForm} from '@/components/create-item-form'
 
 export function ControlPanel() {
   return (
@@ -21,5 +21,5 @@ export function ControlPanel() {
 
       <CreateItemForm />
     </section>
-  );
+  )
 }

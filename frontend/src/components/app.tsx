@@ -1,21 +1,21 @@
 /**
  * Main application component
  */
-import { useEffect } from 'preact/hooks';
-import { wsClient } from '../lib/websocket';
-import { ControlPanel } from './ControlPanel';
-import { LogPanel } from './LogPanel';
+import {useEffect} from 'preact/hooks'
+import {wsClient} from '@/lib/websocket'
+import {ControlPanel} from '@/components/control-panel'
+import {LogPanel} from '@/components/log-panel'
 
 export function App() {
   // Auto-connect on mount
   useEffect(() => {
-    wsClient.connect();
+    wsClient.connect()
 
     // Cleanup on unmount
     return () => {
-      wsClient.disconnect();
-    };
-  }, []);
+      wsClient.disconnect()
+    }
+  }, [])
 
   return (
     <>
@@ -29,5 +29,5 @@ export function App() {
         <LogPanel />
       </main>
     </>
-  );
+  )
 }

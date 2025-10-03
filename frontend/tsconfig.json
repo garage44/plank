@@ -17,7 +17,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
+    "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "preact": ["./node_modules/preact"],
       "preact/*": ["./node_modules/preact/*"]
     }
@@ -25,4 +27,3 @@
   "include": ["src/**/*", "dev.ts", "build.ts"],
   "exclude": ["node_modules", "dist"]
 }
-

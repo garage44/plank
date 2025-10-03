@@ -1,9 +1,9 @@
 /**
  * Form for creating new items
  */
-import { $s } from '../store';
-import { getBackendConfig } from '../lib/config';
-import type { LogEntry } from '../store/types';
+import {$s} from '@/store'
+import {getBackendConfig} from '@/lib/config'
+import type {LogEntry} from '@/store/types'
 
 // Helper to add log entries
 function addLog(message: string, type: LogEntry['type'] = 'info') {
@@ -12,23 +12,23 @@ function addLog(message: string, type: LogEntry['type'] = 'info') {
     timestamp: new Date(),
     message,
     type,
-  };
-  $s.logs = [...$s.logs, entry];
+  }
+  $s.logs = [...$s.logs, entry]
 }
 
 export function CreateItemForm() {
   const handleSubmit = async (e: Event) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const name = $s.itemName.trim();
-    const value = parseInt($s.itemValue, 10);
+    const name = $s.itemName.trim()
+    const value = parseInt($s.itemValue, 10)
 
     if (!name || isNaN(value)) {
-      addLog('Please enter both name and value', 'error');
-      return;
+      addLog('Please enter both name and value', 'error')
+      return
     }
 
-    const config = getBackendConfig();
+    const config = getBackendConfig()
 
     try {
       const response = await fetch(`${config.apiUrl}/api/items`, {
@@ -36,23 +36,23 @@ export function CreateItemForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, value }),
-      });
+        body: JSON.stringify({name, value}),
+      })
 
       if (response.ok) {
         // Reset form directly
-        $s.itemName = '';
-        $s.itemValue = '';
-        addLog('Item created via API (notification will arrive via WebSocket)', 'info');
+        $s.itemName = ''
+        $s.itemValue = ''
+        addLog('Item created via API (notification will arrive via WebSocket)', 'info')
       } else {
-        const error = await response.text();
-        addLog(`Error creating item: ${response.statusText} - ${error}`, 'error');
+        const error = await response.text()
+        addLog(`Error creating item: ${response.statusText} - ${error}`, 'error')
       }
     } catch (error) {
-      addLog(`Network error: ${error}`, 'error');
-      console.error('Error creating item:', error);
+      addLog(`Network error: ${error}`, 'error')
+      console.error('Error creating item:', error)
     }
-  };
+  }
 
   return (
     <div class="form-section">
@@ -85,5 +85,5 @@ export function CreateItemForm() {
         </button>
       </form>
     </div>
-  );
+  )
 }

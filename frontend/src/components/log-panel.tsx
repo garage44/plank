@@ -1,18 +1,18 @@
 /**
  * Log panel component displaying real-time updates
  */
-import { useEffect, useRef } from 'preact/hooks';
-import { $s } from '../store';
+import {useEffect, useRef} from 'preact/hooks'
+import {$s} from '@/store'
 
 export function LogPanel() {
-  const logRef = useRef<HTMLDivElement>(null);
+  const logRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom when new logs are added
   useEffect(() => {
     if (logRef.current) {
-      logRef.current.scrollTop = logRef.current.scrollHeight;
+      logRef.current.scrollTop = logRef.current.scrollHeight
     }
-  }, [$s.logs.length]);
+  }, [$s.logs.length])
 
   return (
     <section class="panel log-panel">
@@ -32,5 +32,5 @@ export function LogPanel() {
         Clear Log
       </button>
     </section>
-  );
+  )
 }
