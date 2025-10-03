@@ -3,27 +3,27 @@
  */
 
 export interface LogEntry {
-  id: string;
-  timestamp: Date;
-  message: string;
-  type: 'info' | 'insert' | 'update' | 'delete' | 'error';
+    id: string;
+    timestamp: Date;
+    message: string;
+    type: 'info' | 'insert' | 'update' | 'delete' | 'error';
 }
 
 export interface AppState {
-  // WebSocket state
-  ws: WebSocket | null;
-  connected: boolean;
+    // WebSocket state
+    ws: WebSocket | null;
+    connected: boolean;
   
-  // Log entries
-  logs: LogEntry[];
+    // Log entries
+    logs: LogEntry[];
   
-  // Form state
-  itemName: string;
-  itemValue: string;
+    // Form state
+    itemName: string;
+    itemValue: string;
 }
 
 export interface BackendConfig {
-  wsUrl: string;
-  apiUrl: string;
+    wsUrl: string;
+    apiUrl: string;
 }
 

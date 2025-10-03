@@ -8,9 +8,9 @@ import type {AppState} from './types'
 // Create reactive state using deepsignal
 // Use $s convention to indicate state variables
 export const $s = deepSignal<AppState>({
-  ws: null,
-  connected: false,
-  logs: [],
-  itemName: '',
-  itemValue: '',
+    ws: null,
+    connected: false,
+    logs: [],
+    itemName: '',
+    itemValue: '',
 })
