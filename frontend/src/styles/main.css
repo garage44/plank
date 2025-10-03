@@ -33,7 +33,10 @@ header {
     flex: 1;
 
     & h1 {
+        align-items: center;
         color: var(--color-text);
+        display: flex;
+        gap: var(--spacing-sm);
         margin: 0 0 var(--spacing-sm) 0;
     }
 
@@ -41,6 +44,11 @@ header {
         color: var(--color-text-secondary);
         margin: 0;
     }
+}
+
+.logo-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 /* Container */
