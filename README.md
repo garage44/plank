@@ -316,6 +316,26 @@ pytest --cov=plank --cov-report=html
 pytest tests/test_websocket.py -v
 ```
 
+## 🧹 Code Quality
+
+### Linting and Formatting
+
+```bash
+# Check code with Ruff
+ruff check plank tests
+
+# Auto-fix issues
+ruff check --fix plank tests
+
+# Format code
+ruff format plank tests
+
+# Check formatting without making changes
+ruff format --check plank tests
+```
+
+Ruff configuration is in `pyproject.toml`.
+
 ## 🌐 Deployment
 
 ### Docker

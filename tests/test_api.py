@@ -1,7 +1,8 @@
 """Tests for API endpoints."""
 
 import pytest
-from httpx import AsyncClient, ASGITransport
+from httpx import ASGITransport, AsyncClient
+
 from plank.main import app
 
 
@@ -26,4 +27,3 @@ async def test_root_endpoint():
         response = await client.get("/")
         assert response.status_code == 200
         assert "html" in response.headers["content-type"]
-

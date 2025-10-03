@@ -1,7 +1,9 @@
 """Database initialization script."""
 
 import asyncio
+
 import asyncpg
+
 from plank.config import settings
 
 

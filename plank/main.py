@@ -5,15 +5,15 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
 
+from plank.api.routes import router
 from plank.config import settings
 from plank.db.connection import db
 from plank.db.listener import listener
 from plank.websocket.manager import manager
-from plank.api.routes import router
 
 
 @asynccontextmanager

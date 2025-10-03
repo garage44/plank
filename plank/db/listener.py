@@ -2,9 +2,10 @@
 
 import asyncio
 import json
-from typing import Callable
+from collections.abc import Callable
 
 import asyncpg
+
 from plank.config import settings
 
 

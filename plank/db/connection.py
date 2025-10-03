@@ -1,6 +1,7 @@
 """Database connection pool management."""
 
 import asyncpg
+
 from plank.config import settings
 
 

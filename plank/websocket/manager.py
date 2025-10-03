@@ -1,7 +1,7 @@
 """WebSocket connection manager."""
 
 import json
-from typing import List
+
 from fastapi import WebSocket
 
 
@@ -9,7 +9,7 @@ class ConnectionManager:
     """Manages WebSocket connections and broadcasts."""
 
     def __init__(self):
-        self.active_connections: List[WebSocket] = []
+        self.active_connections: list[WebSocket] = []
 
     async def connect(self, websocket: WebSocket):
         """Accept and register a new WebSocket connection."""

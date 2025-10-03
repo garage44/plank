@@ -3,7 +3,8 @@
     "typescript/no-explicit-any": "warn",
     "typescript/no-unused-vars": "warn",
     "unicorn/filename-case": "off",
-    "import/no-default-export": "off"
+    "import/no-default-export": "off",
+    "indent": ["error", 4]
   },
   "env": {
     "browser": true,
