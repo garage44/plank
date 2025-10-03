@@ -9,6 +9,8 @@
     "clean": "rm -rf dist",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:css:fix": "stylelint --fix 'src/**/*.css'",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -17,14 +19,20 @@
     "preact": "^10.24.3"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.12.1",
+    "@stylistic/stylelint-plugin": "^4.0.0",
     "@types/bun": "latest",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
-    "@stylistic/eslint-plugin": "^2.12.1",
     "bun-types": "latest",
     "eslint": "^9.17.0",
+    "eslint-plugin-perfectionist": "^4.15.0",
     "eslint-plugin-react": "^7.37.2",
     "oxlint": "^0.16.1",
+    "stylelint": "^16.25.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^39.0.0",
+    "stylelint-order": "^7.0.0",
     "typescript": "^5.7.2"
   }
 }

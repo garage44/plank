@@ -1,16 +1,18 @@
 /**
  * Form for creating new items
  */
-import {$s} from '@/store'
+import {$s} from '@/lib/store'
 import {getBackendConfig} from '@/lib/config'
-import type {LogEntry} from '@/store/types'
+import type {LogEntry} from '@/lib/store'
+import {TextField, NumberField} from './ui/field'
+import {Button} from './ui/button'
 
 // Helper to add log entries
 function addLog(message: string, type: LogEntry['type'] = 'info') {
     const entry: LogEntry = {
         id: `${Date.now()}-${Math.random()}`,
-        timestamp: new Date(),
         message,
+        timestamp: new Date(),
         type,
     }
     $s.logs = [...$s.logs, entry]
@@ -20,8 +22,8 @@ export function CreateItemForm() {
     const handleSubmit = async (e: Event) => {
         e.preventDefault()
 
-        const name = $s.itemName.trim()
-        const value = parseInt($s.itemValue, 10)
+        const name = $s.item_name.trim()
+        const value = parseInt($s.item_value, 10)
 
         if (!name || isNaN(value)) {
             addLog('Please enter both name and value', 'error')
@@ -31,18 +33,18 @@ export function CreateItemForm() {
         const config = getBackendConfig()
 
         try {
-            const response = await fetch(`${config.apiUrl}/api/items`, {
-                method: 'POST',
+            const response = await fetch(`${config.api_url}/api/items`, {
+                body: JSON.stringify({name, value}),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({name, value}),
+                method: 'POST',
             })
 
             if (response.ok) {
                 // Reset form directly
-                $s.itemName = ''
-                $s.itemValue = ''
+                $s.item_name = ''
+                $s.item_value = ''
                 addLog('Item created via API (notification will arrive via WebSocket)', 'info')
             } else {
                 const error = await response.text()
@@ -58,31 +60,23 @@ export function CreateItemForm() {
         <div class="form-section">
             <h3>➕ Create Item</h3>
             <form id="createForm" onSubmit={handleSubmit}>
-                <div class="form-group">
-                    <label for="itemName">Name:</label>
-                    <input
-                        type="text"
-                        id="itemName"
-                        placeholder="Enter item name"
-                        value={$s.itemName}
-                        onInput={(e) => $s.itemName = (e.target as HTMLInputElement).value}
-                        required
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="itemValue">Value:</label>
-                    <input
-                        type="number"
-                        id="itemValue"
-                        placeholder="Enter value"
-                        value={$s.itemValue}
-                        onInput={(e) => $s.itemValue = (e.target as HTMLInputElement).value}
-                        required
-                    />
-                </div>
-                <button type="submit" class="btn btn-primary">
+                <TextField
+                    label="Name:"
+                    id="itemName"
+                    model={$s.$item_name}
+                    placeholder="Enter item name"
+                    required
+                />
+                <NumberField
+                    label="Value:"
+                    id="itemValue"
+                    model={$s.$item_value}
+                    placeholder="Enter value"
+                    required
+                />
+                <Button type="submit" variant="primary">
                     Create Item
-                </button>
+                </Button>
             </form>
         </div>
     )

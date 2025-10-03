@@ -2,7 +2,7 @@
  * Log panel component displaying real-time updates
  */
 import {useEffect, useRef} from 'preact/hooks'
-import {$s} from '@/store'
+import {$s} from '@/lib/store'
 
 export function LogPanel() {
     const logRef = useRef<HTMLDivElement>(null)

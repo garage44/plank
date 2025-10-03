@@ -1,60 +1,170 @@
-/* CSS Variables */
+/* CSS Variables - OKLCH Color System */
+
 :root {
-  /* Colors */
-  --color-primary: #007bff;
-  --color-primary-hover: #0056b3;
-  --color-secondary: #6c757d;
-  --color-success: #28a745;
-  --color-warning: #ffc107;
-  --color-danger: #dc3545;
-  --color-info: #17a2b8;
-  
-  /* Status colors */
-  --color-connected-bg: #d4edda;
-  --color-connected-text: #155724;
-  --color-disconnected-bg: #f8d7da;
-  --color-disconnected-text: #721c24;
-  
-  /* Neutral colors */
-  --color-background: #f5f5f5;
-  --color-surface: #ffffff;
-  --color-text: #333333;
-  --color-text-secondary: #666666;
-  --color-border: #dddddd;
-  
-  /* Log colors */
-  --color-log-bg: #f8f9fa;
-  --color-log-border: var(--color-primary);
-  --color-log-insert: var(--color-success);
-  --color-log-update: var(--color-warning);
-  --color-log-delete: var(--color-danger);
-  
-  /* Spacing */
-  --spacing-xs: 5px;
-  --spacing-sm: 10px;
-  --spacing-md: 15px;
-  --spacing-lg: 20px;
-  --spacing-xl: 30px;
-  
-  /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  --font-family-mono: 'Courier New', monospace;
-  --font-size-base: 14px;
-  --font-size-sm: 12px;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-  
-  /* Border radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  
-  /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-  /* Layout */
-  --max-width: 1200px;
-  --log-height: 400px;
+    /* === Light Theme (Default) === */
+
+    /* Primary colors - Blue accent */
+    --color-primary: oklch(0.55 0.18 250);
+    --color-primary-hover: oklch(0.45 0.20 250);
+    --color-primary-light: oklch(0.85 0.08 250);
+
+    /* Secondary colors */
+    --color-secondary: oklch(0.55 0.05 240);
+
+    /* Semantic colors */
+    --color-success: oklch(0.60 0.16 145);
+    --color-warning: oklch(0.75 0.15 85);
+    --color-danger: oklch(0.60 0.20 25);
+    --color-info: oklch(0.60 0.14 230);
+
+    /* Status colors */
+    --color-connected-bg: oklch(0.90 0.08 145);
+    --color-connected-text: oklch(0.35 0.12 145);
+    --color-disconnected-bg: oklch(0.90 0.10 25);
+    --color-disconnected-text: oklch(0.40 0.15 25);
+
+    /* Neutral colors - Light theme */
+    --color-background: oklch(0.97 0.01 240);
+    --color-surface: oklch(1.00 0 0);
+    --color-surface-secondary: oklch(0.98 0.01 240);
+    --color-text: oklch(0.25 0.02 240);
+    --color-text-secondary: oklch(0.50 0.02 240);
+    --color-border: oklch(0.88 0.01 240);
+    --color-border-hover: oklch(0.75 0.02 240);
+
+    /* Log colors */
+    --color-log-bg: oklch(0.98 0.005 240);
+    --color-log-border: var(--color-primary);
+    --color-log-insert: var(--color-success);
+    --color-log-update: var(--color-warning);
+    --color-log-delete: var(--color-danger);
+
+    /* Scrollbar colors */
+    --color-scrollbar-track: oklch(0.94 0.01 240);
+    --color-scrollbar-thumb: oklch(0.65 0.02 240);
+    --color-scrollbar-thumb-hover: oklch(0.50 0.02 240);
+
+    /* Shadow - using alpha values */
+    --shadow-color: oklch(0 0 0 / 0.1);
+    --shadow-sm: 0 2px 4px var(--shadow-color);
+    --shadow-md: 0 4px 6px var(--shadow-color);
+
+    /* === Non-color tokens === */
+
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --font-family-mono: 'Courier New', Consolas, Monaco, monospace;
+    --font-size-base: 14px;
+    --font-size-sm: 12px;
+    --font-size-xs: 11px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Layout */
+    --max-width: 1200px;
+    --log-height: 400px;
+
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* === Dark Theme === */
+
+[data-theme='dark'] {
+    /* Primary colors - Blue accent */
+    --color-primary: oklch(0.65 0.18 250);
+    --color-primary-hover: oklch(0.75 0.18 250);
+    --color-primary-light: oklch(0.30 0.08 250);
+
+    /* Secondary colors */
+    --color-secondary: oklch(0.55 0.05 240);
+
+    /* Semantic colors */
+    --color-success: oklch(0.70 0.16 145);
+    --color-warning: oklch(0.80 0.15 85);
+    --color-danger: oklch(0.65 0.20 25);
+    --color-info: oklch(0.70 0.14 230);
+
+    /* Status colors */
+    --color-connected-bg: oklch(0.25 0.08 145);
+    --color-connected-text: oklch(0.75 0.12 145);
+    --color-disconnected-bg: oklch(0.25 0.10 25);
+    --color-disconnected-text: oklch(0.80 0.15 25);
+
+    /* Neutral colors - Dark theme */
+    --color-background: oklch(0.15 0.01 240);
+    --color-surface: oklch(0.20 0.01 240);
+    --color-surface-secondary: oklch(0.18 0.01 240);
+    --color-text: oklch(0.90 0.01 240);
+    --color-text-secondary: oklch(0.65 0.01 240);
+    --color-border: oklch(0.30 0.01 240);
+    --color-border-hover: oklch(0.45 0.02 240);
+
+    /* Log colors */
+    --color-log-bg: oklch(0.18 0.01 240);
+
+    /* Scrollbar colors */
+    --color-scrollbar-track: oklch(0.22 0.01 240);
+    --color-scrollbar-thumb: oklch(0.40 0.01 240);
+    --color-scrollbar-thumb-hover: oklch(0.55 0.02 240);
+
+    /* Shadow - darker shadows for dark mode */
+    --shadow-color: oklch(0 0 0 / 0.3);
+}
+
+/* Theme transition */
+
+:root,
+[data-theme='dark'] {
+    transition:
+        background-color var(--transition-base),
+        color var(--transition-base);
+}
+
+/* Theme switcher button */
+
+.theme-switcher {
+    align-items: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+
+    &:hover {
+        background: var(--color-background);
+        border-color: var(--color-border-hover);
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}

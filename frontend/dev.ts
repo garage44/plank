@@ -23,9 +23,9 @@ const server = Bun.serve({
         if (url.pathname.startsWith('/api')) {
             const backendUrl = `${BACKEND_URL}${url.pathname}${url.search}`
             return fetch(backendUrl, {
-                method: req.method,
-                headers: req.headers,
                 body: req.body,
+                headers: req.headers,
+                method: req.method,
             })
         }
 

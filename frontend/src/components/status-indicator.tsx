@@ -1,7 +1,7 @@
 /**
  * Status indicator component showing connection state
  */
-import {$s} from '@/store'
+import {$s} from '@/lib/store'
 
 export function StatusIndicator() {
     return (

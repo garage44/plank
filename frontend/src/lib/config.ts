@@ -9,11 +9,11 @@ export const getBackendConfig = (): BackendConfig => {
     const isDev = window.location.port === '3000'
 
     return {
-        wsUrl: isDev
-            ? 'ws://localhost:8000/ws'
-            : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`,
-        apiUrl: isDev
+        api_url: isDev
             ? 'http://localhost:8000'
             : window.location.origin,
+        ws_url: isDev
+            ? 'ws://localhost:8000/ws'
+            : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`,
     }
 }

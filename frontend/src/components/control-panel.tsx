@@ -2,7 +2,7 @@
  * Control panel for WebSocket connection and item creation
  */
 import {wsClient} from '@/lib/websocket'
-import {$s} from '@/store'
+import {$s} from '@/lib/store'
 import {StatusIndicator} from '@/components/status-indicator'
 import {CreateItemForm} from '@/components/create-item-form'
 

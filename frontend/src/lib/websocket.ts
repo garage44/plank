@@ -1,7 +1,7 @@
 /**
  * WebSocket client management
  */
-import {$s} from '@/store'
+import {$s} from '@/lib/store'
 import {getBackendConfig} from '@/lib/config'
 import type {LogEntry} from '@/store/types'
 
@@ -9,8 +9,8 @@ import type {LogEntry} from '@/store/types'
 function addLog(message: string, type: LogEntry['type'] = 'info') {
     const entry: LogEntry = {
         id: `${Date.now()}-${Math.random()}`,
-        timestamp: new Date(),
         message,
+        timestamp: new Date(),
         type,
     }
     $s.logs = [...$s.logs, entry]
@@ -25,7 +25,7 @@ export class WebSocketClient {
         const config = getBackendConfig()
 
         try {
-            const ws = new WebSocket(config.wsUrl)
+            const ws = new WebSocket(config.ws_url)
 
             ws.onopen = () => {
                 this.reconnectAttempts = 0
