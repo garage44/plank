@@ -7,40 +7,7 @@
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
-    <header>
-        <h1>🏗️ Plank - Real-time Database Updates</h1>
-        <p>WebSocket connection to receive live PostgreSQL notifications</p>
-    </header>
-
-    <main class="container">
-        <section class="panel control-panel">
-            <h2>📡 WebSocket Connection</h2>
-            <div id="status" class="status disconnected">Disconnected</div>
-            <button id="connectBtn" class="btn btn-primary">Connect</button>
-
-            <div class="form-section">
-                <h3>➕ Create Item</h3>
-                <form id="createForm">
-                    <div class="form-group">
-                        <label for="itemName">Name:</label>
-                        <input type="text" id="itemName" placeholder="Enter item name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="itemValue">Value:</label>
-                        <input type="number" id="itemValue" placeholder="Enter value" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Item</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="panel log-panel">
-            <h2>📋 Real-time Updates</h2>
-            <div id="log" class="log"></div>
-            <button id="clearLogBtn" class="btn btn-secondary">Clear Log</button>
-        </section>
-    </main>
-
-    <script type="module" src="./scripts/main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
 </body>
 </html>

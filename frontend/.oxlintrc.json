@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-unused-vars": "warn",
+    "unicorn/filename-case": "off",
+    "import/no-default-export": "off"
+  },
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "globals": {
+    "Bun": "readonly"
+  }
+}

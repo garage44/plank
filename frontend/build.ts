@@ -1,5 +1,5 @@
 // Production build script for bundling the frontend
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 const distDir = './dist';
@@ -9,19 +9,23 @@ console.log('🔨 Building for production...\n');
 // Ensure dist directory exists
 mkdirSync(distDir, { recursive: true });
 
-// Bundle JavaScript
+// Bundle TypeScript/TSX
 const jsResult = await Bun.build({
-  entrypoints: ['./src/scripts/main.js'],
+  entrypoints: ['./src/main.tsx'],
   outdir: distDir,
   minify: true,
   sourcemap: 'external',
+  target: 'browser',
   naming: {
     entry: '[dir]/bundle.[ext]'
   }
 });
 
 if (!jsResult.success) {
-  console.error('❌ JavaScript build failed');
+  console.error('❌ TypeScript build failed');
+  for (const log of jsResult.logs) {
+    console.error(log);
+  }
   process.exit(1);
 }
 
@@ -38,6 +42,9 @@ const cssResult = await Bun.build({
 
 if (!cssResult.success) {
   console.error('❌ CSS build failed');
+  for (const log of cssResult.logs) {
+    console.error(log);
+  }
   process.exit(1);
 }
 
@@ -46,7 +53,7 @@ let html = readFileSync('./src/index.html', 'utf-8');
 
 // Update paths to use /static/ prefix for FastAPI serving
 html = html.replace('./styles/main.css', '/static/bundle.css');
-html = html.replace('./scripts/main.js', '/static/bundle.js');
+html = html.replace('./main.tsx', '/static/bundle.js');
 
 writeFileSync(join(distDir, 'index.html'), html);
 

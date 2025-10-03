@@ -6,10 +6,12 @@ Modern frontend for Plank WebSocket client built with Bun.
 
 - 🚀 **Bun.serve** - Fast dev server with built-in HMR
 - 🎨 **Modern CSS** - CSS nesting and variables
-- 📦 **Modular structure** - Separated HTML, CSS, and JavaScript
-- ⚡ **ES Modules** - Native JavaScript modules
+- 📦 **TypeScript** - Type-safe development with strict mode
+- ⚛️ **Preact** - Lightweight React alternative (3kB)
+- 🔄 **deepsignal** - Simple reactive state management (following Expressio pattern)
 - 🔥 **Hot Module Reloading** - Instant updates without full page refresh
 - 🔌 **API Proxy** - Dev server proxies requests to FastAPI backend
+- 🧹 **oxlint** - Fast Rust-based linter for TypeScript
 
 ## Structure
 
@@ -17,13 +19,25 @@ Modern frontend for Plank WebSocket client built with Bun.
 frontend/
 ├── src/
 │   ├── index.html          # Main HTML file
-│   ├── styles/
-│   │   ├── variables.css   # CSS variables
-│   │   └── main.css        # Main styles with nesting
-│   └── scripts/
-│       ├── main.js         # WebSocket client logic
-│       └── config.js       # Environment configuration
+│   ├── main.tsx            # Application entry point
+│   ├── components/         # Preact components
+│   │   ├── App.tsx
+│   │   ├── ControlPanel.tsx
+│   │   ├── CreateItemForm.tsx
+│   │   ├── LogPanel.tsx
+│   │   └── StatusIndicator.tsx
+│   ├── lib/                # Utilities
+│   │   ├── config.ts       # Environment configuration
+│   │   └── websocket.ts    # WebSocket client
+│   ├── store/              # State management
+│   │   ├── index.ts        # deepsignal store ($s)
+│   │   └── types.ts        # TypeScript types
+│   └── styles/
+│       ├── variables.css   # CSS variables
+│       └── main.css        # Main styles with nesting
 ├── dist/                   # Build output (generated)
+├── .oxlintrc.json          # Linter configuration
+├── tsconfig.json           # TypeScript configuration
 ├── package.json            # Package configuration
 ├── build.ts                # Production build script
 └── dev.ts                  # Development server with HMR
@@ -74,6 +88,15 @@ bun run build
 
 # Clean build artifacts
 bun run clean
+
+# Run linter
+bun run lint
+
+# Auto-fix linting issues
+bun run lint:fix
+
+# Type check
+bun run type-check
 ```
 
 ## Production Build
@@ -134,6 +157,42 @@ Bun's built-in Hot Module Reloading provides instant updates:
 5. **WebSocket HMR Channel** - Bun uses its own WebSocket for HMR communication
 
 This is [Bun's fullstack dev server](https://bun.com/docs/bundler/fullstack) feature in action!
+
+## State Management
+
+The application uses **deepsignal** for reactive state management, following the pattern from the [Expressio project](https://github.com/garage44/expressio).
+
+### The `$s` Convention
+
+State is exported as `$s` to indicate it's a signal/reactive state:
+
+```typescript
+// store/index.ts
+export const $s = deepSignal<AppState>({
+  connected: false,
+  logs: [],
+  itemName: '',
+  itemValue: '',
+});
+```
+
+### Direct Mutations
+
+Components mutate state directly without actions - deepsignal handles reactivity:
+
+```typescript
+// In any component
+import { $s } from '../store';
+
+// Read reactive state
+<div>{$s.connected ? 'Connected' : 'Disconnected'}</div>
+
+// Mutate state directly
+onClick={() => $s.logs = []}
+onInput={(e) => $s.itemName = e.target.value}
+```
+
+This pattern is simpler and easier to follow than centralized actions, as you can trace state changes directly in components.
 
 ## Development vs Production
 
