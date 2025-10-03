@@ -1,0 +1,42 @@
+.form-group {
+    margin-bottom: var(--spacing-md);
+
+    & label {
+        display: block;
+        font-weight: var(--font-weight-medium);
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+input,
+select,
+textarea {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    margin: var(--spacing-xs) 0;
+    padding: var(--spacing-sm);
+    transition: border-color 0.2s ease;
+    width: 100%;
+
+    &:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #999;
+    }
+}
+
+select {
+    appearance: none;
+    background: white;
+    cursor: pointer;
+}
+
+textarea {
+    font-family: inherit;
+    resize: vertical;
+}

@@ -1,0 +1,41 @@
+{
+    "plugins": ["stylelint-order", "@stylistic/stylelint-plugin"],
+    "rules": {
+        "@stylistic/indentation": 4,
+        "max-nesting-depth": 6,
+        "property-no-vendor-prefix": true,
+        "function-calc-no-unspaced-operator": true,
+        "no-duplicate-selectors": true,
+        "no-descending-specificity": null,
+        "color-named": "never",
+        "selector-max-id": 0,
+        "rule-empty-line-before": "always-multi-line",
+        "order/order": [
+            [
+                "custom-properties",
+                "dollar-variables",
+                {
+                "type": "at-rule",
+                "name": "extend"
+                },
+                {
+                "type": "at-rule",
+                "name": "include",
+                "hasBlock": false
+                },
+                "declarations",
+                {
+                "type": "at-rule",
+                "name": "include",
+                "hasBlock": true
+                },
+                "rules"
+            ]
+        ],
+        "order/properties-alphabetical-order": true
+    },
+    "ignoreFiles": [
+        "node_modules",
+        "**/*.js"
+    ]
+  }
