@@ -3,6 +3,7 @@
  */
 import {$s} from '@/lib/store'
 import {getBackendConfig} from '@/lib/config'
+import {Icon} from '@/components/ui/icon'
 import type {LogEntry} from '@/lib/store'
 import {TextField, NumberField} from './ui/field'
 import {Button} from './ui/button'
@@ -58,7 +59,10 @@ export function CreateItemForm() {
 
     return (
         <div class="form-section">
-            <h3>➕ Create Item</h3>
+            <h3>
+                <Icon name="plus" size={18} class="panel-icon" />
+                Create Item
+            </h3>
             <form id="createForm" onSubmit={handleSubmit}>
                 <TextField
                     label="Name:"

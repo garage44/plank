@@ -5,6 +5,7 @@
 import {useEffect} from 'preact/hooks'
 import {$s} from '@/lib/store'
 import {getBackendConfig} from '@/lib/config'
+import {Icon} from '@/components/ui/icon'
 import type {Item, LogEntry} from '@/lib/store'
 
 // Helper to add log entries
@@ -124,7 +125,10 @@ export function ItemsList() {
     if ($s.items.length === 0) {
         return (
             <div class="panel">
-                <h2>📦 Items</h2>
+                <h2>
+                    <Icon name="box" size={20} class="panel-icon" />
+                    Items
+                </h2>
                 <p class="empty-state">No items yet. Create one using the form!</p>
             </div>
         )
@@ -132,7 +136,10 @@ export function ItemsList() {
 
     return (
         <div class="panel">
-            <h2>📦 Items ({$s.items.length})</h2>
+            <h2>
+                <Icon name="box" size={20} class="panel-icon" />
+                Items ({$s.items.length})
+            </h2>
             <div class="items-list">
                 {$s.items.map((item) => (
                     <div key={item.id} class="item-card">
@@ -146,7 +153,7 @@ export function ItemsList() {
                                     title="Delete item"
                                     aria-label={`Delete ${item.name}`}
                                 >
-                                    🗑️
+                                    <Icon name="trash" size={18} />
                                 </button>
                             </div>
                         </div>

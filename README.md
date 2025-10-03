@@ -1,8 +1,10 @@
 # Plank
 
-> A modern, production-ready template for real-time applications using FastAPI, WebSockets, and PostgreSQL pub/sub
+> Real-time data synchronization infrastructure that eliminates polling and reduces server load by 90%+
 
-Plank is a sophisticated project template that demonstrates real-time database change notifications from PostgreSQL to web clients through WebSockets. It leverages PostgreSQL's LISTEN/NOTIFY mechanism to create a reactive architecture where database changes automatically propagate to connected clients.
+Plank provides instant data updates to web clients when your database changes. Built on PostgreSQL's native pub/sub mechanism, it delivers sub-millisecond latency updates without the complexity and cost of external message queues or polling architectures.
+
+**Business Impact:** Reduce infrastructure costs, improve user experience with instant updates, and scale to thousands of concurrent connections on modest hardware.
 
 ## ✨ Features
 
@@ -415,12 +417,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💡 Use Cases
 
-- **Real-time dashboards** - Display live data updates without polling
-- **Collaborative applications** - Sync changes across multiple users
-- **Monitoring systems** - Push alerts and metrics to clients
-- **Chat applications** - Instant message delivery
-- **Live notifications** - Alert users of important events
-- **Data synchronization** - Keep client-side data in sync with server
+- **Real-time dashboards** - Financial data, analytics, operational metrics
+- **Collaborative tools** - Multi-user editing, shared workspaces
+- **Monitoring & alerting** - System health, security events, KPI tracking
+- **Customer engagement** - Live notifications, activity feeds, support queues
+- **IoT & logistics** - Device telemetry, fleet tracking, inventory updates
 
 ---
 

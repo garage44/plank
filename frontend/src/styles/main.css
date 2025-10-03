@@ -72,26 +72,37 @@ header {
     box-shadow: var(--shadow-sm);
     padding: var(--spacing-lg);
 
-    & h2 {
+    & h2,
+    & h3 {
+        align-items: center;
         color: var(--color-text);
+        display: flex;
+        gap: var(--spacing-sm);
         margin-bottom: var(--spacing-md);
         margin-top: 0;
     }
 
     & h3 {
-        margin-bottom: var(--spacing-md);
         margin-top: var(--spacing-xl);
     }
+}
+
+.panel-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 /* Status indicator */
 
 .status {
+    align-items: center;
     border-radius: var(--radius-sm);
+    display: flex;
     font-weight: var(--font-weight-bold);
+    gap: var(--spacing-xs);
+    justify-content: center;
     margin-bottom: var(--spacing-lg);
     padding: var(--spacing-sm);
-    text-align: center;
     transition: all 0.3s ease;
 
     &.connected {
@@ -290,11 +301,13 @@ header {
 }
 
 .item-delete-btn {
+    align-items: center;
     background: transparent;
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
     cursor: pointer;
-    font-size: 1.2rem;
+    display: flex;
     line-height: 1;
     opacity: 0.6;
     padding: var(--spacing-xs);
@@ -303,6 +316,7 @@ header {
     &:hover {
         background: var(--color-danger, #ef4444);
         border-color: var(--color-danger, #ef4444);
+        color: var(--color-surface);
         opacity: 1;
         transform: scale(1.1);
     }

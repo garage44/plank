@@ -1,7 +1,7 @@
 [project]
 name = "plank"
 version = "0.1.0"
-description = "Real-time PostgreSQL pub/sub with FastAPI and WebSockets"
+description = "Real-time data synchronization infrastructure using PostgreSQL, FastAPI and WebSockets"
 authors = [
     {name = "Your Name", email = "you@example.com"}
 ]

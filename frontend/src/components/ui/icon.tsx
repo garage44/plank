@@ -13,9 +13,17 @@ interface IconProps {
 
 // Icon definitions - only path data, no styling
 const icons: Record<string, JSX.Element | JSX.Element[]> = {
+    box: [
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />,
+        <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" />,
+    ],
     check: (
         <path d="M20 6L9 17l-5-5" />
     ),
+    clipboard: [
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />,
+        <path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />,
+    ],
     close: (
         <path d="M18 6L6 18M6 6l12 12" />
     ),
@@ -43,6 +51,10 @@ const icons: Record<string, JSX.Element | JSX.Element[]> = {
     plus: (
         <path d="M12 5v14M5 12h14" />
     ),
+    radio: [
+        <circle cx="12" cy="12" r="2" />,
+        <path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14" />,
+    ],
     sun: [
         <circle cx="12" cy="12" r="5" />,
         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />,

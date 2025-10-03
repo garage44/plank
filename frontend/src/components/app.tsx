@@ -27,7 +27,7 @@ export function App() {
                     <div class="header-text">
                         <h1>
                             <Icon name="layers" size={28} class="logo-icon" />
-                            Plank - Real-time Database Updates
+                            Plank - Real-time Data Sync
                         </h1>
                         <p>WebSocket connection to receive live PostgreSQL notifications</p>
                     </div>
