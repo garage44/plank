@@ -11,7 +11,8 @@ Plank is a sophisticated project template that demonstrates real-time database c
 - 🗄️ **PostgreSQL Integration** - Robust database with built-in pub/sub
 - 📡 **Smart Change Detection** - Automatic client updates on database changes
 - ⚡ **Async/Await** - Fully asynchronous architecture using asyncio
-- 🛠️ **Modern Python Tooling** - UV for dependency management, pyproject.toml configuration
+- 🛠️ **Modern Tooling** - UV for Python, Bun for frontend with CSS nesting & variables
+- 🎨 **Modern Frontend** - Modular JavaScript, modern CSS with nesting, separate build process
 - 🏗️ **Production Ready** - Structured for scalability and maintainability
 
 ## 🏛️ Architecture
@@ -36,6 +37,7 @@ The system works by:
 
 ## 🚀 Tech Stack
 
+### Backend
 - **[Python 3.11+](https://www.python.org/)** - Modern Python with async support
 - **[FastAPI](https://fastapi.tiangolo.com/)** - High-performance async web framework
 - **[PostgreSQL 14+](https://www.postgresql.org/)** - Advanced relational database with pub/sub
@@ -43,19 +45,23 @@ The system works by:
 - **[UV](https://github.com/astral-sh/uv)** - Blazingly fast Python package installer
 - **[Uvicorn](https://www.uvicorn.org/)** - ASGI server for FastAPI
 
+### Frontend
+- **[Bun](https://bun.sh)** - Fast JavaScript bundler and runtime
+- **Modern CSS** - CSS nesting and CSS variables for maintainable styles
+- **ES Modules** - Native JavaScript modules for clean code organization
+
 ## 📋 Prerequisites
 
 - Python 3.11 or higher
 - PostgreSQL 14 or higher
 - UV package manager (recommended) or pip
+- Bun 1.0 or higher (for frontend development)
 
 ## 🔧 Installation
 
-### Using UV (Recommended)
-
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/plank.git
+git clone https://github.com/garage44/plank.git
 cd plank
 
 # Install UV if you haven't already
@@ -65,20 +71,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv sync
 ```
 
-### Using pip
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/plank.git
-cd plank
-
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate
-
-# Install dependencies
-pip install -e .
-```
 
 ## ⚙️ Configuration
 
@@ -103,17 +95,53 @@ uv run python -m plank.db.init
 
 ## 🎯 Quick Start
 
-1. **Start the server:**
+### Setup
 
+1. **Install Bun** (if you haven't already):
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+2. **Install frontend dependencies:**
+```bash
+cd frontend
+bun install
+```
+
+3. **Initial build:**
+```bash
+bun run build
+cd ..
+```
+
+### Development Workflow
+
+Run both services in separate terminals:
+
+**Terminal 1** - FastAPI backend server:
 ```bash
 uv run uvicorn plank.main:app --reload
 ```
 
-2. **Open your browser to:**
-   - API Documentation: http://localhost:8000/docs
-   - WebSocket Test Client: http://localhost:8000
+**Terminal 2** - Bun frontend dev server with HMR:
+```bash
+cd frontend
+bun run dev
+```
 
-3. **Connect via WebSocket:**
+### Access the Application
+
+#### Development
+- **Frontend Application:** http://localhost:3000 (Bun dev server with HMR)
+- **Backend API:** http://localhost:8000
+- **API Documentation:** http://localhost:8000/docs
+
+#### Production
+- **All routes:** http://localhost:8000 (FastAPI serves built frontend)
+
+The Bun dev server provides Hot Module Reloading - changes appear instantly! API requests are automatically proxied to the FastAPI backend.
+
+### Connect via WebSocket
 
 ```javascript
 const ws = new WebSocket('ws://localhost:8000/ws');
@@ -204,6 +232,17 @@ plank/
 ├── pyproject.toml           # Project configuration and dependencies
 ├── README.md                # This file
 ├── .env.example             # Example environment variables
+├── frontend/                # Frontend application (Bun)
+│   ├── src/
+│   │   ├── index.html       # Main HTML file
+│   │   ├── styles/          # Modern CSS with nesting & variables
+│   │   │   ├── variables.css
+│   │   │   └── main.css
+│   │   └── scripts/         # JavaScript modules
+│   │       └── main.js
+│   ├── dist/                # Built frontend (generated)
+│   ├── package.json         # Bun package configuration
+│   └── build.ts             # Build script
 ├── plank/
 │   ├── __init__.py
 │   ├── main.py              # FastAPI application entry point
@@ -213,22 +252,16 @@ plank/
 │   │   └── routes.py
 │   ├── websocket/           # WebSocket handlers
 │   │   ├── __init__.py
-│   │   ├── manager.py       # WebSocket connection manager
-│   │   └── handlers.py      # Message handlers
-│   ├── db/                  # Database layer
-│   │   ├── __init__.py
-│   │   ├── connection.py    # Database connection pool
-│   │   ├── listener.py      # PostgreSQL LISTEN/NOTIFY handler
-│   │   ├── models.py        # Database models
-│   │   └── init.py          # Database initialization
-│   └── core/                # Core utilities
+│   │   └── manager.py       # WebSocket connection manager
+│   └── db/                  # Database layer
 │       ├── __init__.py
-│       └── pubsub.py        # Pub/sub mechanism
+│       ├── connection.py    # Database connection pool
+│       ├── listener.py      # PostgreSQL LISTEN/NOTIFY handler
+│       ├── models.py        # Database models
+│       └── init.py          # Database initialization
 └── tests/
     ├── __init__.py
-    ├── test_api.py
-    ├── test_websocket.py
-    └── test_pubsub.py
+    └── test_api.py
 ```
 
 ## 🔍 Key Components

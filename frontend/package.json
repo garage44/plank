@@ -1,0 +1,14 @@
+{
+  "name": "plank-frontend",
+  "version": "0.1.0",
+  "description": "Frontend for Plank - Real-time WebSocket client",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run dev.ts",
+    "build": "bun run build.ts",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}
