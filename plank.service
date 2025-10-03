@@ -1,0 +1,35 @@
+[Unit]
+Description=Plank FastAPI Real-time WebSocket Server
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=plank
+Group=plank
+WorkingDirectory=/home/plank/plank
+Environment="PATH=/home/plank/.local/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="DATABASE_URL=postgresql://plank_user:plank_pass@localhost:5432/plank_db"
+
+# Initialize database before starting the server
+ExecStartPre=/usr/bin/sleep 2
+ExecStartPre=/home/plank/.local/bin/uv run python -m plank.db.init
+
+# Start the FastAPI server
+ExecStart=/home/plank/.local/bin/uv run uvicorn plank.main:app --host 0.0.0.0 --port 8000
+
+# Restart policy
+Restart=always
+RestartSec=5
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=plank
+
+[Install]
+WantedBy=multi-user.target
