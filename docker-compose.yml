@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://plank_user:plank_pass@db:5432/plank_db
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        sleep 5 &&
+        uv run python -m plank.db.init &&
+        uv run uvicorn plank.main:app --host 0.0.0.0 --port 8000
+      "
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: plank_db
+      POSTGRES_USER: plank_user
+      POSTGRES_PASSWORD: plank_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plank_user -d plank_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
