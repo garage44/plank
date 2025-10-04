@@ -28,7 +28,7 @@ async def init_test_database(test_db_url):
     db_name = test_db_url.rsplit("/", 1)[1]
 
     # Connect to default postgres database
-    conn = await asyncpg.connect(base_url.replace(db_name, "postgres"))
+    conn = await asyncpg.connect(f"{base_url}/postgres")
 
     try:
         # Drop and recreate test database
@@ -122,7 +122,7 @@ async def init_test_database(test_db_url):
     yield test_db_url
 
     # Cleanup after all tests
-    conn = await asyncpg.connect(base_url.replace(db_name, "postgres"))
+    conn = await asyncpg.connect(f"{base_url}/postgres")
     try:
         # Disconnect all users from test database
         await conn.execute(f"""
