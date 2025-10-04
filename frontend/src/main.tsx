@@ -3,6 +3,7 @@
  */
 import {render} from 'preact'
 import {App} from '@/components/app'
+import './styles/main.css'
 
 // Render the application
 const root = document.getElementById('root')

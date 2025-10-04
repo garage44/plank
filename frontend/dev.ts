@@ -7,12 +7,6 @@ const BACKEND_URL = 'http://localhost:8000'
 console.log('🚀 Starting Bun development server with HMR...\n')
 
 const server = Bun.serve({
-    port: FRONTEND_PORT,
-
-    routes: {
-        '/': index,
-    },
-
     // Enable development mode for HMR and detailed errors
     development: true,
 
@@ -38,6 +32,12 @@ const server = Bun.serve({
         }
 
         return new Response('Not Found', {status: 404})
+    },
+
+    port: FRONTEND_PORT,
+
+    routes: {
+        '/': index,
     },
 })
 

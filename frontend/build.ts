@@ -1,51 +1,40 @@
 // Production build script for bundling the frontend
-import { mkdirSync, readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import {mkdirSync, readFileSync, writeFileSync} from 'fs'
+import {join} from 'path'
 
 const distDir = './dist'
 
 console.log('🔨 Building for production...\n')
 
 // Ensure dist directory exists
-mkdirSync(distDir, { recursive: true })
+mkdirSync(distDir, {recursive: true})
 
-// Bundle TypeScript/TSX
-const jsResult = await Bun.build({
-  entrypoints: ['./src/main.tsx'],
-  outdir: distDir,
-  minify: true,
-  sourcemap: 'external',
-  target: 'browser',
-  naming: {
-    entry: '[dir]/bundle.[ext]',
-  },
+// Bundle TypeScript/TSX and CSS together
+// Bun will automatically extract CSS imports from .tsx files
+const result = await Bun.build({
+    entrypoints: ['./src/main.tsx'],
+    minify: true,
+    naming: {
+        entry: '[dir]/bundle.[ext]',
+    },
+    outdir: distDir,
+    sourcemap: 'external',
+    target: 'browser',
 })
 
-if (!jsResult.success) {
-  console.error('❌ TypeScript build failed')
-  for (const log of jsResult.logs) {
-    console.error(log)
-  }
-  process.exit(1)
+if (!result.success) {
+    console.error('❌ Build failed')
+    for (const log of result.logs) {
+        console.error(log)
+    }
+    process.exit(1)
 }
 
-// Bundle CSS
-const cssResult = await Bun.build({
-  entrypoints: ['./src/styles/main.css'],
-  outdir: distDir,
-  minify: true,
-  sourcemap: 'external',
-  naming: {
-    entry: '[dir]/bundle.[ext]',
-  },
-})
-
-if (!cssResult.success) {
-  console.error('❌ CSS build failed')
-  for (const log of cssResult.logs) {
-    console.error(log)
-  }
-  process.exit(1)
+// Check if CSS was generated
+const outputs = result.outputs
+const cssOutput = outputs.find((o) => o.path.endsWith('.css'))
+if (!cssOutput) {
+    console.warn('⚠️  No CSS output found - CSS imports from components may not be included')
 }
 
 // Copy and update HTML with correct static paths for FastAPI
