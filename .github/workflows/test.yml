@@ -20,7 +20,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U plank_user -d plank_test_db"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -44,11 +44,21 @@ jobs:
         uv sync --all-extras
 
     - name: Wait for PostgreSQL
+      env:
+        PGPASSWORD: plank_pass
       run: |
         until pg_isready -h localhost -p 5432 -U plank_user; do
           echo "Waiting for postgres..."
           sleep 2
         done
+        echo "PostgreSQL is ready!"
+
+    - name: Verify PostgreSQL connection
+      env:
+        PGPASSWORD: plank_pass
+      run: |
+        psql -h localhost -p 5432 -U plank_user -d plank_test_db -c "SELECT version();"
+        echo "✓ Successfully connected to PostgreSQL"
 
     - name: Run tests
       env:
