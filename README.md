@@ -102,7 +102,7 @@ cd ..
 Copy `plank.service` to systemd:
 
 ```bash
-sudo cp plank.service /etc/systemd/system/
+sudo cp docs/plank.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable plank
 sudo systemctl start plank
@@ -115,7 +115,7 @@ Check status: `sudo systemctl status plank`
 Copy `nginx.conf` and configure:
 
 ```bash
-sudo cp nginx.conf /etc/nginx/sites-available/plank
+sudo cp docs/nginx.conf /etc/nginx/sites-available/plank
 sudo nano /etc/nginx/sites-available/plank  # Edit domain/IP
 sudo ln -s /etc/nginx/sites-available/plank /etc/nginx/sites-enabled/
 sudo nginx -t
