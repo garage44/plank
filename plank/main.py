@@ -84,7 +84,6 @@ async def index():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    print(websocket)
     """WebSocket endpoint for real-time updates."""
     await manager.connect(websocket)
     try:
