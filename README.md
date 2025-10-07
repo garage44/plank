@@ -4,6 +4,21 @@
 
 Plank provides instant data updates to web clients when your database changes. Built on PostgreSQL's native pub/sub mechanism, it delivers sub-millisecond latency updates without the complexity and cost of external message queues or polling architectures.
 
+## 🎓 About This Project
+
+This is a **learning and exploration project** created to gain hands-on experience with modern real-time architectures, specifically PostgreSQL's NOTIFY/LISTEN mechanism with WebSockets. Built with AI assistance to accelerate development and focus on understanding architectural patterns rather than implementation minutiae.
+
+**Learning Focus:**
+- Real-time data synchronization patterns (PostgreSQL pub/sub)
+- WebSocket connection lifecycle management
+- Modern Python async/await patterns with FastAPI
+- Full-stack deployment (Docker, systemd, nginx)
+- Modern frontend development with Preact and Bun
+
+This project demonstrates practical understanding of these technologies and serves as a foundation for discussing real-time architecture trade-offs and design decisions.
+
+📖 **Read more:** [Technical Decisions & Trade-offs](docs/TECHNICAL_DECISIONS.md)
+
 ## ✨ Features
 
 - 🚀 **FastAPI** - Modern, fast web framework for building APIs
@@ -132,10 +147,30 @@ See `docker-compose.yml` for container setup:
 docker-compose up -d
 ```
 
+## 📚 Documentation
+
+- [Technical Decisions & Trade-offs](docs/TECHNICAL_DECISIONS.md) - Architecture choices and when to use this pattern
+- [Implementation Guide](docs/IMPLEMENTATION.md) - Detailed implementation notes
+- [Quick Start](docs/QUICKSTART.md) - Get up and running in 5 minutes
+- [Testing Guide](docs/TESTING.md) - How to run and write tests
+- [Use Cases](docs/USECASES.md) - When this architecture makes sense
+
+## 💡 Learning Resources
+
+This project explores several modern concepts:
+
+1. **PostgreSQL NOTIFY/LISTEN** - Native pub/sub without external message queues
+2. **WebSocket Lifecycle** - Connection management, broadcasting, error handling
+3. **Async Python** - FastAPI's async/await patterns with asyncio
+4. **Modern Frontend** - Preact with signals for reactive state management
+5. **Full Deployment** - Docker, systemd, nginx configuration
+
+See [TECHNICAL_DECISIONS.md](docs/TECHNICAL_DECISIONS.md) for detailed trade-off analysis.
+
 ## 📝 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Made with ❤️ using FastAPI, WebSockets, and PostgreSQL**
+**Built with FastAPI, WebSockets, and PostgreSQL | Created as a learning project for exploring real-time architectures**

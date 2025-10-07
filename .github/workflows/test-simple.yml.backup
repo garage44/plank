@@ -1,0 +1,93 @@
+name: Run Tests (Simple)
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: plank_test_db
+          POSTGRES_USER: plank_user
+          POSTGRES_PASSWORD: plank_pass
+        ports:
+          - 5432:5432
+        # No health check - we'll wait in the workflow steps instead
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        version: "latest"
+
+    - name: Install dependencies
+      run: |
+        uv sync --all-extras
+
+    - name: Wait for PostgreSQL (with timeout)
+      env:
+        PGPASSWORD: plank_pass
+      run: |
+        echo "Waiting for PostgreSQL to be ready..."
+        for i in {1..30}; do
+          if pg_isready -h localhost -p 5432 -U plank_user > /dev/null 2>&1; then
+            echo "✓ PostgreSQL is ready!"
+            break
+          fi
+          echo "  Attempt $i/30: PostgreSQL not ready yet, waiting..."
+          sleep 2
+        done
+        
+        # Final check
+        if ! pg_isready -h localhost -p 5432 -U plank_user; then
+          echo "✗ PostgreSQL failed to start"
+          exit 1
+        fi
+
+    - name: Verify PostgreSQL connection
+      env:
+        PGPASSWORD: plank_pass
+      run: |
+        psql -h localhost -p 5432 -U plank_user -d plank_test_db -c "SELECT version();"
+        echo "✓ Successfully connected to PostgreSQL"
+
+    - name: Run tests
+      env:
+        TEST_DATABASE_URL: postgresql://plank_user:plank_pass@localhost:5432/plank_test_db
+      run: |
+        uv run pytest tests/ -v --tb=short
+
+    - name: Run tests with coverage
+      env:
+        TEST_DATABASE_URL: postgresql://plank_user:plank_pass@localhost:5432/plank_test_db
+      run: |
+        uv run pytest tests/ --cov=plank --cov-report=term-missing --cov-report=xml
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      if: github.event_name == 'push'
+      with:
+        files: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+
+
