@@ -32,7 +32,7 @@ textarea {
 
 select {
     appearance: none;
-    background: white;
+    background: #fff;
     cursor: pointer;
 }
 
